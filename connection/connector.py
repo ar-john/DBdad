@@ -14,8 +14,9 @@ print(mydb)
 
 cursor = mydb.cursor()
 
-cursor.execute("USE car;
-    SELECT year, model 
-    WHERE make="Ford")
+print("connection successful!")
+# cursor.execute("USE car;
+#     SELECT year, model 
+#     WHERE make="Ford")
 
     
