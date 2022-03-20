@@ -1,0 +1,6 @@
+so i think i gotta download python again.
+download it to : 
+w3schools says to navigate here 
+C:\Users\34joh\AppData\Local\Programs\Python\Python36-32\Scripts>....
+and run the cmd
+>python -m pip install mysql-connector-python
