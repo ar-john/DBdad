@@ -1,6 +1,5 @@
 # importing the mysql module so we can connnect to mysql
-# I feel like i can import more than just the connector,,
-# like the whole mysql module
+
 import mysql.connector
 
 # mysql module using the connector.connect to connect tothe mysql db
