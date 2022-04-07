@@ -6,12 +6,14 @@ import tkinter as tk
 mydb = connector.DB()
 
 #initialize the db connection
-mydb.initdb()
+# mydb.initdb()
 
 
 #this method is to test the functionality of the tkinter gui
 def subLogin():
     print('test good')
+    mydb.authLogin(username.get(), password.get())
+    
 
 
 
