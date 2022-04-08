@@ -25,6 +25,7 @@ class DB:
         mycursor = self.cursor.execute('use DadsParts;')
         print('using dadsparts db')
 
+
     #method to verify a users login request
     def authLogin(self, user, passw):
         #sql query that checks password at the emp_id
@@ -33,16 +34,20 @@ class DB:
         self.cursor.execute(sql)
         #get our returned string too a variable
         result = self.cursor.fetchone()
+        #this loop takes our queried password and checks it against the given input
         for x in result:
-            print(x)
+            passw = passw.encode('UTF-8')
+            #check if the entered passwords hash is the same as the stored password hash   
+            hashed = hashlib.sha256(passw).hexdigest()
+            
+            if hashed.upper() == x:
+                print("successfully logged in")
+                # logic
+            else:
+                print("incorrect password")
+                # logic
 
-        passw.encode()
-        #check if the entered passwords hash is the same as the stored password hash
-        hashed = hashlib.sha1(passw).hexdigest()
-        if hashed == result:
-            print("successfully logged in")
-        else:
-            print("incorrect password")
+
 
     def __del__(self):
         self.cursor.close()
