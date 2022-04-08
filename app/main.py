@@ -9,9 +9,8 @@ mydb = connector.DB()
 # mydb.initdb()
 
 
-#this method is to test the functionality of the tkinter gui
+#this method is the from the command property in the submitBtn
 def subLogin():
-    print('test good')
     mydb.authLogin(username.get(), password.get())
     
 
