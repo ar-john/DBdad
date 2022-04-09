@@ -14,6 +14,7 @@ def partpageGui():
     pictureLabel.pack(side=tk.LEFT)
 
     partNum = 42069
+    partDescription = "EJ engine for Subaru WRX"
     partPrice = 15.99
     qoh = 10
     availableBy = "4/8/2022"
@@ -21,6 +22,8 @@ def partpageGui():
     descriptionFrame = tk.Frame(partPage)
     partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partNum))
     partNumLabel.pack()
+    partNameLabel = tk.Label(descriptionFrame, text="Part Description: " + partDescription)
+    partNameLabel.pack()
     partPriceLabel = tk.Label(descriptionFrame, text="Price: " + str(partPrice))
     partPriceLabel.pack()
     qohLabel = tk.Label(descriptionFrame, text="Quantity: " + str(qoh))
@@ -35,6 +38,7 @@ def partpageGui():
         part.append(partPrice)
         part.append(qoh)
         part.append(availableBy)
+        print(part)
         return part
 
     def back():
