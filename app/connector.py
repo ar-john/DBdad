@@ -15,9 +15,9 @@ class DB:
     # new init method for the db
     def __init__(self):
         self.con = mysql.connector.connect(
-            host="35.239.196.216",
+            host="127.0.0.1",
             user="root",
-            password="dad"
+            password="root"
             )
         print(self.con)
         print("connection successful!")
@@ -54,8 +54,12 @@ class DB:
         return True
     
 
-
-    def searchPart():
+    #this method is to search the part with the array returned to us from PARTFINDER
+    def searchPart(self, arr):
+        i = 0
+        for x in arr:
+            print(x)
+        
 
 
 

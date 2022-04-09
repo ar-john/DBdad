@@ -1,6 +1,15 @@
+#!/usr/bin/python
 import tkinter as tk
 
+
+import connector
+
+
+
 def partWin():
+    #creates a db object
+    mydb = connector.DB()
+
     #create part finder window
     partFinder = tk.Tk()
     partFinder.title("Part Finder")
@@ -97,6 +106,9 @@ def partWin():
         if description.get():
             props.append(description.get())
         print(props)
+        mydb.searchPart(props)
+        
+
 
     def clearProps():
         year.set(None)
