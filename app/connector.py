@@ -56,10 +56,19 @@ class DB:
 
     #this method is to search the part with the array returned to us from PARTFINDER
     def searchPart(self, arr):
-        i = 0
-        for x in arr:
-            print(x)
+        # i = 0
+        # new = []
+        sql = ('select * from PART P join COMPATIBLE COM on P.PART_NUM=COM.PART_NUM join CAR C on C.CAR_ID=COM.CAR_ID where C.CAR_YEAR= ' + arr[0] + 
+        ' and C.MAKE= \'' + arr[1] + '\' and C.MODEL= \'' + arr[2] + '\';') 
+        print(sql)
+        self.cursor.execute(sql)
         
+        result = self.cursor.fetchall()
+
+        print(result)
+            
+
+
 
 
 

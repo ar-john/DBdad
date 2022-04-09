@@ -48,9 +48,11 @@ def partWin():
 
     selectMake.pack()
 
-    models =[]
-    for i in range(11):
-        models.append("model"+str(i))
+    models =['Mustang', 'i8', 'Cruze']
+    # commented this out for now bc only gives model1, model2.. etc in the dropdown
+    # how can we make this list reflexive with all the models?
+    # for i in range(11):
+    #     models.append("model"+str(i))
 
     #create model label and menu in new frame
     selectModel = tk.Frame(partFinder)
