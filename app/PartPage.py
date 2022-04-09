@@ -1,52 +1,54 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 
-partPage = tk.Tk()
-partPage.title("Part Description")
-partPage.geometry('350x200+50+50')
+def partpageGui():
 
-partPicture = Image.open("ej engine.jpg")
-partPicture = partPicture.resize((100, 100))
-partPicture = ImageTk.PhotoImage(partPicture)
-pictureLabel = tk.Label(partPage, image=partPicture)
-pictureLabel.pack(side=tk.LEFT)
+    partPage = tk.Tk()
+    partPage.title("Part Description")
+    partPage.geometry('350x200+50+50')
 
-partNum = 42069
-partPrice = 15.99
-qoh = 10
-availableBy = "4/8/2022"
+    partPicture = Image.open('app/ej engine.jpg')
+    partPicture = partPicture.resize((100, 100))
+    partPicture = ImageTk.PhotoImage(partPicture)
+    pictureLabel = tk.Label(partPage, image=partPicture)
+    pictureLabel.pack(side=tk.LEFT)
 
-descriptionFrame = tk.Frame(partPage)
-partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partNum))
-partNumLabel.pack()
-partPriceLabel = tk.Label(descriptionFrame, text="Price: " + str(partPrice))
-partPriceLabel.pack()
-qohLabel = tk.Label(descriptionFrame, text="Quantity: " + str(qoh))
-qohLabel.pack()
-availableByLabel = tk.Label(descriptionFrame, text="Available by: " + availableBy)
-availableByLabel.pack()
-descriptionFrame.pack(side=tk.LEFT)
+    partNum = 42069
+    partPrice = 15.99
+    qoh = 10
+    availableBy = "4/8/2022"
 
-def addToInvoice():
-    part = []
-    part.append(partNum)
-    part.append(partPrice)
-    part.append(qoh)
-    part.append(availableBy)
-    return part
+    descriptionFrame = tk.Frame(partPage)
+    partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partNum))
+    partNumLabel.pack()
+    partPriceLabel = tk.Label(descriptionFrame, text="Price: " + str(partPrice))
+    partPriceLabel.pack()
+    qohLabel = tk.Label(descriptionFrame, text="Quantity: " + str(qoh))
+    qohLabel.pack()
+    availableByLabel = tk.Label(descriptionFrame, text="Available by: " + availableBy)
+    availableByLabel.pack()
+    descriptionFrame.pack(side=tk.LEFT)
 
-def back():
-    return None
+    def addToInvoice():
+        part = []
+        part.append(partNum)
+        part.append(partPrice)
+        part.append(qoh)
+        part.append(availableBy)
+        return part
 
-buttonFrame = tk.Frame(partPage)
+    def back():
+        return None
 
-cartButton = tk.Button(buttonFrame, text="Add To Cart", command=addToInvoice)
-cartButton.pack(side=tk.RIGHT)
+    buttonFrame = tk.Frame(partPage)
 
-backButton = tk.Button(buttonFrame, text="Back", command=back)
-backButton.pack(side=tk.RIGHT)
+    cartButton = tk.Button(buttonFrame, text="Add To Cart", command=addToInvoice)
+    cartButton.pack(side=tk.RIGHT)
 
-buttonFrame.pack(side=tk.BOTTOM)
+    backButton = tk.Button(buttonFrame, text="Back", command=back)
+    backButton.pack(side=tk.RIGHT)
+
+    buttonFrame.pack(side=tk.BOTTOM)
 
 
-partPage.mainloop()
+    partPage.mainloop()

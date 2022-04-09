@@ -1,16 +1,16 @@
 #!/usr/bin/python
 import connector
 import PartFinder
+import PartPage
 import tkinter as tk
 
 #creates a db object
 mydb = connector.DB()
 
-#initialize the db connection
-# mydb.initdb()
 
 
 #this method is the from the command property in the submitBtn
+#if login is good then user gets new window
 def subLogin():
     if mydb.authLogin(username.get(), password.get()) == True:
         root.destroy()
@@ -45,6 +45,6 @@ submitbtn.place(x=150, y=135, width=55)
 
 root.mainloop() #tested fine. command executes on button click
 
-# tkinter._test()
+
 
 

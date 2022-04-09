@@ -55,6 +55,11 @@ class DB:
     
 
 
+    def searchPart():
+
+
+
+
 
     def __del__(self):
         self.cursor.close()
