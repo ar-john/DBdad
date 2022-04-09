@@ -4,6 +4,8 @@ import mysql.connector
 # importing python hash library
 import hashlib
 
+import tkinter as tk
+import PartFinder
 
 #I think itll be good to have the database as its own class
 #db class to be exported to main app
@@ -39,13 +41,18 @@ class DB:
             passw = passw.encode('UTF-8')
             #check if the entered passwords hash is the same as the stored password hash   
             hashed = hashlib.sha256(passw).hexdigest()
-            
+            print(x)
+            print(hashed.upper())
             if hashed.upper() == x:
                 print("successfully logged in")
-                # logic
+                
             else:
                 print("incorrect password")
                 # logic
+                return False
+
+        return True
+    
 
 
 

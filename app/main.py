@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import connector
+import PartFinder
 import tkinter as tk
 
 #creates a db object
@@ -11,7 +12,11 @@ mydb = connector.DB()
 
 #this method is the from the command property in the submitBtn
 def subLogin():
-    mydb.authLogin(username.get(), password.get())
+    if mydb.authLogin(username.get(), password.get()) == True:
+        root.destroy()
+        window = tk.Toplevel(PartFinder.partWin())
+        window.transient(root)
+        
     
 
 
