@@ -1,7 +1,10 @@
 import tkinter as tk
 
+from pkg_resources import empty_provider
+import CreateNewEmployee
+
 def empAdmin():
-    
+
     employeeAdministration = tk.Tk()
     employeeAdministration.title("Employee Administration")
     employeeAdministration.geometry('350x200+50+50')
@@ -12,7 +15,10 @@ def empAdmin():
 
     def createNew():
         #launch create new employee window
-        return
+        employeeAdministration.destroy()
+        window = tk.Toplevel(CreateNewEmployee.newEmp())
+        window.transient(window)
+
 
     updateExistingFrame = tk.Frame(employeeAdministration)
     updateExistingLabel = tk.Label(updateExistingFrame, text="Update Existing Employee: ")
