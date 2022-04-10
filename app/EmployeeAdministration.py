@@ -11,6 +11,11 @@ def empAdmin():
 
     def updateExisting():
         #launch employee search window
+        # changing the CreateNewEmployee to call UpdateExistingEMployee instead. waiting on update page to be finished
+        # employeeAdministration.destroy()
+        # window = tk.Toplevel(CreateNewEmployee.newEmp())
+        # window.transient(window)
+
         return
 
     def createNew():
