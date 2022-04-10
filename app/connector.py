@@ -80,7 +80,17 @@ class DB:
 
         print(result)
             
+    #this will input a new employee in the database        
+    def createEmp(self, arr):
+        arr[4] = arr[4].encode('UTF-8')
+            #check if the entered passwords hash is the same as the stored password hash   
+        hashed = hashlib.sha256(arr[4]).hexdigest()
 
+        sql = ('insert into EMPLOYEE values (\'' + arr[0] + 
+        '\', \'' + arr[1] + 
+         '\',\'' + arr[2] +  
+         '\',\'' + arr[3] +  
+         '\',\'' + hashed +  '\');' ) 
 
 
 
