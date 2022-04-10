@@ -9,6 +9,7 @@ import PartFinder
 
 #I think itll be good to have the database as its own class
 #db class to be exported to main app
+#so far all db queries come through here
 class DB:
     # methods
     
@@ -53,7 +54,7 @@ class DB:
 
         return True
 
-
+    #method checks for the admin level of the user
     def chkAdmin(self, user):
         sql = ('select admin from EMPLOYEE where EMP_ID = ' + user + ';')
         self.cursor.execute(sql)

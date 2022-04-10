@@ -1,11 +1,8 @@
 
 import tkinter as tk
 import AdminPartUpdate
+import EmployeeAdministration
 
-
-    
-# import UpdateExistingEmployee
-# import AdminPartUpdate
 
 def updateEmployee():
     #launch employee update screen
@@ -14,6 +11,14 @@ def updateEmployee():
 
 
 def AdminCon():
+
+    def updateEmployee():
+        #launch employee update screen
+        adminConsole.destroy()
+        window = tk.Toplevel(EmployeeAdministration.empAdmin())
+        window.transient(window)
+
+    #method to take us to the Adminpartupdate page
     def updatePart():
         #launch AdminSearch screen
         adminConsole.destroy()
