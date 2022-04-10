@@ -52,7 +52,19 @@ class DB:
                 return False
 
         return True
-    
+
+
+    def chkAdmin(self, user):
+        sql = ('select admin from EMPLOYEE where EMP_ID = ' + user + ';')
+        self.cursor.execute(sql)
+        #get our returned string too a variable
+        result = self.cursor.fetchone()
+        for x in result:
+
+            print(result)
+            if x == 1:
+                return True
+
 
     #this method is to search the part with the array returned to us from PARTFINDER
     def searchPart(self, arr):

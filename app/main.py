@@ -2,6 +2,9 @@
 import connector
 import PartFinder
 import PartPage
+import AdminConsole
+import UpdateExistingEmployee
+import AdminPartUpdate
 import tkinter as tk
 
 #creates a db object
@@ -13,12 +16,20 @@ mydb = connector.DB()
 #if login is good then user gets new window
 def subLogin():
     if mydb.authLogin(username.get(), password.get()) == True:
-        root.destroy()
-        window = tk.Toplevel(PartFinder.partWin())
-        window.transient(root)
-        
+        if mydb.chkAdmin(username.get()) == True:
+            root.destroy()
+            window = tk.Toplevel(AdminConsole.AdminCon())
+            window.transient(root)
+        else:
+            root.destroy()
+            window = tk.Toplevel(PartFinder.partWin())
+            window.transient(root)
     
-
+# def updatePart():
+#     #launch AdminSearch screen
+#     window.destroy()
+#     window = tk.Toplevel(AdminPartUpdate.adminPart())
+#     window.transient(root)
 
 
 #test tkinter login page
