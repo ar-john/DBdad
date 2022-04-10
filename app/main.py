@@ -25,11 +25,6 @@ def subLogin():
             window = tk.Toplevel(PartFinder.partWin())
             window.transient(root)
     
-# def updatePart():
-#     #launch AdminSearch screen
-#     window.destroy()
-#     window = tk.Toplevel(AdminPartUpdate.adminPart())
-#     window.transient(root)
 
 
 #test tkinter login page
