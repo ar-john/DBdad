@@ -1,4 +1,6 @@
+#!/usr/bin/python
 # importing the mysql module so we can connnect to mysql
+
 
 import mysql.connector
 # importing python hash library
@@ -6,7 +8,7 @@ import hashlib
 
 import tkinter as tk
 import PartFinder
-
+import CreateNewEmployee
 #I think itll be good to have the database as its own class
 #db class to be exported to main app
 #so far all db queries come through here
@@ -81,24 +83,42 @@ class DB:
         print(result)
             
     #this will input a new employee in the database        
-    def createEmp(self, arr):
-        arr[4] = arr[4].encode('UTF-8')
-            #check if the entered passwords hash is the same as the stored password hash   
-        hashed = hashlib.sha256(arr[4]).hexdigest()
+    def createEmp(self, empId, fname, lname, admin, passw):
+        print(passw)
+        # i = passw.encode('utf-8')
+          
+        # hashed = hashlib.sha256(i).hexdigest()
+        a = '0'
+        if admin == 1:
+            a='1'
+        
 
-        sql = ('insert into EMPLOYEE values (\'' + arr[0] + 
-        '\', \'' + arr[1] + 
-         '\',\'' + arr[2] +  
-         '\',\'' + arr[3] +  
-         '\',\'' + hashed +  '\');' ) 
+        sql = ('insert into EMPLOYEE values (\'' + empId + '\', \'' + fname + '\',\'' + lname +  '\',\'' + a +  '\',\'' + self.hashpass(passw) +  '\');' ) 
+        print(sql)
+        self.cursor.execute(sql)
+        print('employee entered')
+        # result = self.cursor.fetchall()
+
+        # print(result)
+
+    def hashpass(self, passw):
+        for x in passw:
+
+            # i = x.encode('utf-8')
+          
+            hashed = hashlib.sha256(x.encode('utf-8')).hexdigest()
+
+        return hashed
 
 
-
-
-
+    def exit(self):
+        self.cursor.close()
+        self.con.close()
+        print('db connection closed')
 
     def __del__(self):
         self.cursor.close()
         self.con.close()
+        print('db connection closed')
 
 
