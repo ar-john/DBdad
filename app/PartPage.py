@@ -7,7 +7,7 @@ def partpageGui():
     partPage.title("Part Description")
     partPage.geometry('350x200+50+50')
 
-    partPicture = Image.open('app/ej engine.jpg')
+    partPicture = Image.open('img/ej engine.jpg')
     partPicture = partPicture.resize((100, 100))
     partPicture = ImageTk.PhotoImage(partPicture)
     pictureLabel = tk.Label(partPage, image=partPicture)
@@ -57,4 +57,4 @@ def partpageGui():
 
     partPage.mainloop()
 
-partpageGui()
+# partpageGui()
