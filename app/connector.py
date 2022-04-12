@@ -61,9 +61,10 @@ class DB:
         sql = ('select admin from EMPLOYEE where EMP_ID = ' + user + ';')
         self.cursor.execute(sql)
         #get our returned string too a variable
-        result = self.cursor.fetchone()
+        result = self.cursor.fetchall()
+        result = list(sum(result, ()))
+        print(result)
         for x in result:
-
             print(result)
             if x == 1:
                 return True
@@ -73,14 +74,46 @@ class DB:
     def searchPart(self, arr):
         # i = 0
         # new = []
-        sql = ('select * from PART P join COMPATIBLE COM on P.PART_NUM=COM.PART_NUM join CAR C on C.CAR_ID=COM.CAR_ID where C.CAR_YEAR= ' + arr[0] + 
+        sql = ('select P.PART_NUM from PART P join COMPATIBLE COM on P.PART_NUM=COM.PART_NUM join CAR C on C.CAR_ID=COM.CAR_ID where C.CAR_YEAR= ' + arr[0] +
         ' and C.MAKE= \'' + arr[1] + '\' and C.MODEL= \'' + arr[2] + '\';') 
         print(sql)
         self.cursor.execute(sql)
-        
         result = self.cursor.fetchall()
-
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
         print(result)
+
+    def getPart(self, partNum):
+        query = "select * from PART where PART_NUM = " + partNum
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getCustomer(self, id):
+        query = 'select fName, lName from CUSTOMER where CUST_ID =  \'' + id + '\''
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getInvoice(self, invnum):
+        query = "select * from INVOICE where INV_NUM = " + invnum
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = list(sum(result, ()))
+        print(result)
+        return result
+
+    def addPartToInvoice(self, invnum, partnum, qty):
+        query = 'update invoice set PART_NUM = \'' + str(partnum) + '\' , PARTQTY = \'' + str(qty) + '\' where INV_NUM = \'' + str(invnum) + '\''
+        print(query)
+        self.cursor.execute(query)
+        self.con.commit()
+        return
             
     #this will input a new employee in the database        
     def createEmp(self, empId, fname, lname, admin, passw):
@@ -118,8 +151,6 @@ class DB:
         return sanitizedResult
 
     def getModelsByMake(self, make):
-        #for make in makes:
-         #   print(make[0])
         query = 'select MODEL from CAR where MAKE = \'' + make + '\' ORDER BY MODEL'
         print(query)
         self.cursor.execute(query)
@@ -127,6 +158,31 @@ class DB:
         sanitizedResult = list(sum(result, ()))
         print(sanitizedResult)
         return sanitizedResult
+
+    def getPartCategories(self):
+        query = 'select CATEGORY from PART GROUP BY CATEGORY'
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getPartDescriptions(self, cat):
+        query = 'select PART_DESC from PART where CATEGORY = \'' + cat + '\' order by PART_DESC'
+        print(query)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+
+    def addInvoiceToDB(self, invnum, custid, empid):
+        query = 'insert into INVOICE (INV_NUM, CUST_ID, EMP_ID) values (\'' + invnum + '\', \'' + custid + '\',\'' + empid +  '\');'
+        print(query)
+        self.cursor.execute(query)
+        self.con.commit()
+        return
 
     def hashpass(self, passw):
         for x in passw:

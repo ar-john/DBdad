@@ -1,60 +1,59 @@
 import tkinter as tk
 from PIL import ImageTk, Image
+from connector import DB
+import PartFinder
+import InvoiceGenerator
 
-def partpageGui():
-
+def partpageGui(partnum, invoiceNumber = None):
+    db = DB()
     partPage = tk.Tk()
     partPage.title("Part Description")
-    partPage.geometry('350x200+50+50')
+    partPage.geometry('600x200+50+50')
 
-    partPicture = Image.open('app/ej engine.jpg')
+    partProps = db.getPart(partnum)
+
+    partPicture = Image.open("../img/" + str(partProps[0])+'.jpg')
     partPicture = partPicture.resize((100, 100))
     partPicture = ImageTk.PhotoImage(partPicture)
     pictureLabel = tk.Label(partPage, image=partPicture)
     pictureLabel.pack(side=tk.LEFT)
 
-    partNum = 42069
-    partDescription = "EJ engine for Subaru WRX"
-    partPrice = 15.99
-    qoh = 10
-    availableBy = "4/8/2022"
-
     descriptionFrame = tk.Frame(partPage)
-    partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partNum))
+    partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partProps[0]))
     partNumLabel.pack()
-    partNameLabel = tk.Label(descriptionFrame, text="Part Description: " + partDescription)
+    partNameLabel = tk.Label(descriptionFrame, text="Part Description: " + str(partProps[2]))
     partNameLabel.pack()
-    partPriceLabel = tk.Label(descriptionFrame, text="Price: " + str(partPrice))
+    partPriceLabel = tk.Label(descriptionFrame, text="Price: " + str(partProps[3]))
     partPriceLabel.pack()
-    qohLabel = tk.Label(descriptionFrame, text="Quantity: " + str(qoh))
+    qohLabel = tk.Label(descriptionFrame, text="Quantity: " + str(partProps[4]))
     qohLabel.pack()
-    availableByLabel = tk.Label(descriptionFrame, text="Available by: " + availableBy)
+    availableByLabel = tk.Label(descriptionFrame, text="Available by: " + str(partProps[5]))
     availableByLabel.pack()
     descriptionFrame.pack(side=tk.LEFT)
 
-    def addToInvoice():
-        part = []
-        part.append(partNum)
-        part.append(partPrice)
-        part.append(qoh)
-        part.append(availableBy)
-        print(part)
-        return part
+    def addToInvoice(part, qty):
+        invoice = InvoiceGenerator.InvoiceGenerator()
+        invoice.addPartToInvoice(invoiceNumber, part, qty)
+        invoice.createInvoiceGraphics(invoiceNumber)
+        return
 
     def back():
-        return None
+        partPage.destroy()
+        window = tk.Toplevel(PartFinder.partWin())
+        window.transient(partPage)
+        return
 
     buttonFrame = tk.Frame(partPage)
 
-    cartButton = tk.Button(buttonFrame, text="Add To Cart", command=addToInvoice)
-    cartButton.pack(side=tk.RIGHT)
+    cartButton = tk.Button(buttonFrame, text="Add To Cart", command=lambda: addToInvoice(partProps[0], 1))
+    cartButton.pack(side=tk.LEFT)
 
     backButton = tk.Button(buttonFrame, text="Back", command=back)
-    backButton.pack(side=tk.RIGHT)
+    backButton.pack(side = tk.LEFT)
 
     buttonFrame.pack(side=tk.BOTTOM)
 
 
     partPage.mainloop()
 
-partpageGui()
+#partpageGui('00001')
