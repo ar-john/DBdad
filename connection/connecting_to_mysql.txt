@@ -1,3 +1,0 @@
-so i think i gotta download python again.
-and run the cmd
->python -m pip install mysql-connector-python

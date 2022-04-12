@@ -1,14 +1,30 @@
 import tkinter as tk
+import connector
 
-def adminPart():
+
+def adminPart(num):
     adminUpdatePage = tk.Tk()
     adminUpdatePage.title("Admin Part Update")
     adminUpdatePage.geometry('350x200+50+50')
+    part = []
+    def getPart():
+        mydb = connector.DB()
+        sql = ('select * from PART where PART_NUM= \'' + partNum + '\' ;')
+        mydb.cursor.execute(sql)
+        result = mydb.cursor.fetchall()
+        print(result)
+        for x in result:
+            part.append(x)
 
-    partNum = 42069
-    partDescription = "EJ engine for Subaru WRX"
-    partPrice = 15.99
-    qoh = 10
+        print(part)
+        return part    
+        mydb.exit()
+
+
+    partNum = num
+    partDescription = part[1]
+    partPrice = part[3]
+    qoh = part[4]
 
     descriptionFrame = tk.Frame(adminUpdatePage)
     partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partNum))
@@ -56,6 +72,8 @@ def adminPart():
     backButton.pack(side=tk.RIGHT)
 
     buttonFrame.pack(side=tk.BOTTOM)
+
+    getPart()
 
 
     adminUpdatePage.mainloop()

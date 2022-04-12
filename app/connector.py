@@ -110,6 +110,9 @@ class DB:
 
         return hashed
 
+    
+
+
 
     def exit(self):
         self.cursor.close()

@@ -2,7 +2,7 @@
 import tkinter as tk
 import AdminPartUpdate
 import EmployeeAdministration
-
+import AdminSearch
 
 def updateEmployee():
     #launch employee update screen
@@ -22,7 +22,7 @@ def AdminCon():
     def updatePart():
         #launch AdminSearch screen
         adminConsole.destroy()
-        window = tk.Toplevel(AdminPartUpdate.adminPart())
+        window = tk.Toplevel(AdminSearch.adSearch())
         window.transient(window)
 
     adminConsole = tk.Tk()

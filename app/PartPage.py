@@ -56,3 +56,5 @@ def partpageGui():
 
 
     partPage.mainloop()
+
+partpageGui()
