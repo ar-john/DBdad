@@ -7,7 +7,7 @@ import mysql.connector
 import hashlib
 
 import tkinter as tk
-import PartFinder
+
 import CreateNewEmployee
 #I think itll be good to have the database as its own class
 #db class to be exported to main app
@@ -20,7 +20,7 @@ class DB:
         self.con = mysql.connector.connect(
             host="127.0.0.1",
             user="root",
-            password="root"
+            password="Robot1.a"
             )
         print(self.con)
         print("connection successful!")
@@ -100,6 +100,33 @@ class DB:
         # result = self.cursor.fetchall()
 
         # print(result)
+
+    def getCarYears(self):
+        query = 'select CAR_YEAR from CAR ORDER BY CAR_YEAR'
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getMakesByYear(self, year):
+        query = 'select MAKE FROM CAR WHERE CAR_YEAR = ' + year + ' ORDER BY MAKE'
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getModelsByMake(self, make):
+        #for make in makes:
+         #   print(make[0])
+        query = 'select MODEL from CAR where MAKE = \'' + make + '\' ORDER BY MODEL'
+        print(query)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
 
     def hashpass(self, passw):
         for x in passw:
