@@ -43,4 +43,4 @@ def empConsole():
 
     employeeConsole.mainloop()
 
-empConsole()
+# empConsole()

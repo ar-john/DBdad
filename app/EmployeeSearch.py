@@ -51,4 +51,4 @@ def searchEmp():
 
     searchEmployee.mainloop()
 
-searchEmp()
+# searchEmp()
