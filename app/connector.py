@@ -20,7 +20,7 @@ class DB:
         self.con = mysql.connector.connect(
             host="127.0.0.1",
             user="root",
-            password="Robot1.a"
+            password="root"
             )
         print(self.con)
         print("connection successful!")
