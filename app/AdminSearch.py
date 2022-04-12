@@ -1,5 +1,7 @@
+
 import tkinter as tk
 import AdminPartUpdate
+import connector 
 
 def adSearch():
 
@@ -48,15 +50,25 @@ def adSearch():
 
 
     def getProps():
-        props = []
-        if partNumInput.get() != None:
-            props.append(partNumInput.get())
-        if category.get() != None:
-            props.append(category.get())
-        if description.get() != None:
-            props.append(description.get())
-        print(props)
-        AdminPartUpdate.adminPart(partNumInput.get())
+        result = []
+        mydb = connector.DB()
+        # props = []
+        # if partNumInput.get() != None:
+        #     props.append(partNumInput.get())
+        # if category.get() != None:
+        #     props.append(category.get())
+        # if description.get() != None:
+        #     props.append(description.get())
+        # print(props)
+        # AdminPartUpdate.adminPart(partNumInput.get())
+        if mydb.searchPart(partNumInput.get()) == True:
+            for x in mydb.returnPart(partNumInput.get()):
+                result.append(x)
+            window = tk.Toplevel(AdminPartUpdate.adminPart(partNumInput.get(), category=result[1], desc=result[2], Pprice=result[3], QTY=result[4], date=result[5]))
+            window.transient(window)
+            print(result)
+        else:
+            print('Incorrect input')
 
 
 
@@ -75,3 +87,4 @@ def adSearch():
     buttonFrame.pack(side=tk.BOTTOM)
 
     adminSearch.mainloop()
+# adSearch()

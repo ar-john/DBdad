@@ -2,6 +2,7 @@ import tkinter as tk
 
 from pkg_resources import empty_provider
 import CreateNewEmployee
+import EmployeeSearch
 
 def empAdmin():
 
@@ -11,12 +12,12 @@ def empAdmin():
 
     def updateExisting():
         #launch employee search window
-        # changing the CreateNewEmployee to call UpdateExistingEMployee instead. waiting on update page to be finished
-        # employeeAdministration.destroy()
-        # window = tk.Toplevel(CreateNewEmployee.newEmp())
-        # window.transient(window)
+        
+        employeeAdministration.destroy()
+        window = tk.Toplevel(EmployeeSearch.searchEmp())
+        window.transient(window)
 
-        return
+       
 
     def createNew():
         #launch create new employee window

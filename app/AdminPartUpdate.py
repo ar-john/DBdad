@@ -2,52 +2,67 @@ import tkinter as tk
 import connector
 
 
-def adminPart(num):
+def adminPart(num, category, desc, Pprice, QTY, date):
+    part = []
+
+    def __init__(self):
+        mydb = connector.DB()
+        result = mydb.returnPart(num)
+
+        for x in result:
+            part.append(str(x))
+        
+        print(part)
+        return part
+
+
+
     adminUpdatePage = tk.Tk()
     adminUpdatePage.title("Admin Part Update")
     adminUpdatePage.geometry('350x200+50+50')
-    part = []
+    
     def getPart():
         mydb = connector.DB()
-        sql = ('select * from PART where PART_NUM= \'' + partNum + '\' ;')
-        mydb.cursor.execute(sql)
-        result = mydb.cursor.fetchall()
-        print(result)
-        for x in result:
-            part.append(x)
+        # sql = ('select * from PART where PART_NUM= \'' + partNum + '\' ;')
+        # mydb.cursor.execute(sql)
+        # result = mydb.cursor.fetchall()
+        # print(result)
+        # for x in result:
+        #     part.append(x)
 
-        print(part)
-        return part    
-        mydb.exit()
+        # print(part)
+        # return part    
+        # mydb.exit()
+        mydb.updatePart(editStockInput.get(), editPriceInput.get(), num)
 
 
     partNum = num
-    partDescription = part[1]
-    partPrice = part[3]
-    qoh = part[4]
+    # partDescription = part[1]
+    # partPrice = part[3]
+    # qoh = part[4]
 
     descriptionFrame = tk.Frame(adminUpdatePage)
-    partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ str(partNum))
+    partNumLabel = tk.Label(descriptionFrame, text="Part Number: "+ partNum)
     partNumLabel.pack()
-    partNameLabel = tk.Label(descriptionFrame, text="Part Description: " + partDescription)
+    partNameLabel = tk.Label(descriptionFrame, text="Part Description: " + desc)
     partNameLabel.pack()
-    qohLabel = tk.Label(descriptionFrame, text="Current Quantity: " + str(qoh))
+    qohLabel = tk.Label(descriptionFrame, text="Current Quantity: " + str(QTY))
     qohLabel.pack()
-    partPriceLabel = tk.Label(descriptionFrame, text="Current Price: " + str(partPrice))
+    partPriceLabel = tk.Label(descriptionFrame, text="Current Price: " + str(Pprice))
     partPriceLabel.pack()
     descriptionFrame.pack()
 
     editStockFrame = tk.Frame(adminUpdatePage)
     editStockLabel = tk.Label(editStockFrame, text="Update Stock: ")
     editStockLabel.pack(side=tk.LEFT)
-    editStockInput = tk.Text(editStockFrame, height=1, width=15)
+    editStockInput = tk.Entry(editStockFrame, width=15)
     editStockInput.pack(side=tk.LEFT)
     editStockFrame.pack()
 
     editPriceFrame = tk.Frame(adminUpdatePage)
     editPriceLabel = tk.Label(editPriceFrame, text="Update Price: ")
     editPriceLabel.pack(side=tk.LEFT)
-    editPriceInput = tk.Text(editPriceFrame, height=1, width=15)
+    editPriceInput = tk.Entry(editPriceFrame, width=15)
     editPriceInput.pack(side=tk.LEFT)
     editPriceFrame.pack()
 
@@ -65,7 +80,7 @@ def adminPart(num):
 
     buttonFrame = tk.Frame(adminUpdatePage)
 
-    cartButton = tk.Button(adminUpdatePage, text="Update", command=updatePart)
+    cartButton = tk.Button(adminUpdatePage, text="Update", command=getPart)
     cartButton.pack(side=tk.RIGHT)
 
     backButton = tk.Button(adminUpdatePage, text="Cancel", command=back)
@@ -77,3 +92,5 @@ def adminPart(num):
 
 
     adminUpdatePage.mainloop()
+
+# adminPart('00001')
