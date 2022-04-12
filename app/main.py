@@ -6,6 +6,7 @@ import AdminConsole
 import UpdateExistingEmployee
 import AdminPartUpdate
 import tkinter as tk
+import EmployeeConsole
 
 #creates a db object
 # mydb = connector.DB()
@@ -27,7 +28,8 @@ def subLogin():
         else:
             mydb.exit()
             root.destroy()
-            window = tk.Toplevel(PartFinder.partWin())
+            console = EmployeeConsole.EConsole()
+            window = tk.Toplevel(console.empConsole())
             window.transient(root)
             
         
