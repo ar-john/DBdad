@@ -12,11 +12,9 @@ def partpageGui(partnum, invoiceNumber = None):
 
     partProps = db.getPart(partnum)
 
- <<<<<<< employee-features
     partPicture = Image.open("../img/" + str(partProps[0])+'.jpg')
-=======
-    partPicture = Image.open('img/ej engine.jpg')
- >>>>>>> master
+
+
     partPicture = partPicture.resize((100, 100))
     partPicture = ImageTk.PhotoImage(partPicture)
     pictureLabel = tk.Label(partPage, image=partPicture)
@@ -60,8 +58,3 @@ def partpageGui(partnum, invoiceNumber = None):
 
     partPage.mainloop()
 
- <<<<<<< employee-features
-#partpageGui('00001')
-=======
-# partpageGui()
- >>>>>>> master
