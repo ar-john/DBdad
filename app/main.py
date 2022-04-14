@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import sys
 import connector
 import PartFinder
 import PartPage
@@ -28,8 +29,8 @@ def subLogin():
         else:
             mydb.exit()
             root.destroy()
-            console = EmployeeConsole.EConsole()
-            window = tk.Toplevel(console.empConsole())
+            #console = EmployeeConsole.EConsole()
+            window = tk.Toplevel(EmployeeConsole.EConsole())
             window.transient(root)
             
         
@@ -59,6 +60,10 @@ password.place(x = 150, y = 50 , width=100)
 submitbtn = tk.Button(root, text='Login', bg='blue', command=subLogin)
 submitbtn.place(x=150, y=135, width=55)
 
+def on_closing():
+    sys.exit()
+
+root.protocol("WM_DELETE_WINDOW", on_closing)
 root.mainloop() #tested fine. command executes on button click
 
 

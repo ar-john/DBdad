@@ -80,8 +80,8 @@ class DB:
     def searchPart(self, arr):
         # i = 0
         # new = []
-        sql = ('select P.PART_NUM from PART P join COMPATIBLE COM on P.PART_NUM=COM.PART_NUM join CAR C on C.CAR_ID=COM.CAR_ID where C.CAR_YEAR= ' + arr[0] +
-        ' and C.MAKE= \'' + arr[1] + '\' and C.MODEL= \'' + arr[2] + '\';') 
+        sql = ('select P.PART_NUM from PART P join COMPATIBLE COM on P.COMP_ID=COM.COMP_ID join CAR C on C.COMP_ID=COM.COMP_ID where C.CAR_YEAR= ' + arr[0] +
+        ' and C.MAKE= \'' + arr[1] + '\' and C.MODEL= \'' + arr[2] + '\' and P.PART_DESC = \'' + arr[4]  + '\';') 
         print(sql)
         self.cursor.execute(sql)
         result = self.cursor.fetchall()
@@ -91,7 +91,7 @@ class DB:
         print(result)
 
     def getPart(self, partNum):
-        query = "select * from PART where PART_NUM = " + partNum
+        query = "select * from PART where PART_NUM = " + str(partNum)
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         sanitizedResult = list(sum(result, ()))
@@ -99,7 +99,23 @@ class DB:
         return sanitizedResult
 
     def getCustomer(self, id):
-        query = 'select fName, lName from CUSTOMER where CUST_ID =  \'' + id + '\''
+        query = 'select fName, lName from CUSTOMER where CUST_ID = ' + str(id)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getCustomerCar(self, id):
+        query = 'select CAR_ID from customer where cust_id = ' + str(id)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getCar(self, carid):
+        query = 'select * from car where car_id = ' + str(carid)
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         sanitizedResult = list(sum(result, ()))
@@ -107,7 +123,7 @@ class DB:
         return sanitizedResult
 
     def getInvoice(self, invnum):
-        query = "select * from INVOICE where INV_NUM = " + invnum
+        query = 'select * from INVOICE where INV_NUM =  + \'' + invnum + '\''
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         result = list(sum(result, ()))
@@ -120,6 +136,23 @@ class DB:
         self.cursor.execute(query)
         self.con.commit()
         return
+
+    def getCustomers(self):
+        query = 'select lname from customer order by lname'
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = list(sum(result, ()))
+        print(result)
+        return result
+
+    def getCustomerNumByName(self, name):
+        query = 'select CUST_ID from customer where lname = \'' + name + '\''
+        print(query)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = list(sum(result, ()))
+        print(result)
+        return result
             
     #this will input a new employee in the database        
     def createEmp(self, empId, fname, lname, admin, passw):
@@ -140,8 +173,15 @@ class DB:
 
         # print(result)
 
+    def createCustomer(self, fname, lname, car):
+        query = 'insert into CUSTOMER (car_id, fName, lname) values ( \'' + str(car) + '\', \'' + str(fname) + '\' , \'' + str(lname) + '\' );'
+        print(query)
+        self.cursor.execute(query)
+        self.con.commit()
+        return
+
     def getCarYears(self):
-        query = 'select CAR_YEAR from CAR ORDER BY CAR_YEAR'
+        query = 'select CAR_YEAR from CAR GROUP BY CAR_YEAR'
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         sanitizedResult = list(sum(result, ()))
@@ -149,7 +189,7 @@ class DB:
         return sanitizedResult
 
     def getMakesByYear(self, year):
-        query = 'select MAKE FROM CAR WHERE CAR_YEAR = ' + year + ' ORDER BY MAKE'
+        query = 'select MAKE FROM CAR WHERE CAR_YEAR = ' + year + ' GROUP BY MAKE'
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         sanitizedResult = list(sum(result, ()))
@@ -157,7 +197,7 @@ class DB:
         return sanitizedResult
 
     def getModelsByMake(self, make):
-        query = 'select MODEL from CAR where MAKE = \'' + make + '\' ORDER BY MODEL'
+        query = 'select MODEL from CAR where MAKE = \'' + make + '\' GROUP BY MODEL'
         print(query)
         self.cursor.execute(query)
         result = self.cursor.fetchall()
@@ -165,26 +205,44 @@ class DB:
         print(sanitizedResult)
         return sanitizedResult
 
-    def getPartCategories(self):
-        query = 'select CATEGORY from PART GROUP BY CATEGORY'
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
-        sanitizedResult = list(sum(result, ()))
-        print(sanitizedResult)
-        return sanitizedResult
-
-    def getPartDescriptions(self, cat):
-        query = 'select PART_DESC from PART where CATEGORY = \'' + cat + '\' order by PART_DESC'
+    def getPartCategories(self, comp= None):
+        query = 'select CATEGORY from PART WHERE COMP_ID = ' + str(comp) + ' GROUP BY CATEGORY'
         print(query)
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         sanitizedResult = list(sum(result, ()))
         print(sanitizedResult)
         return sanitizedResult
+
+    def getPartDescriptions(self, cat, comp = None):
+        query = 'select PART_DESC from PART where CATEGORY = \'' + cat + '\' and  COMP_ID = ' + str(comp) + ' order by PART_DESC'
+        print(query)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
+
+    def getCompatibility(self, year = None, make = None, model = None):
+        query = 'SELECT COMP_ID FROM CAR WHERE CAR_YEAR = \'' + str(year) + '\' and  MAKE = \'' + make + '\' and MODEL = \'' + model + '\''
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = list(sum(result, ()))
+        print(result)
+        return result
+
+    def getCarByYMM(self, year = None, make = None, model = None):
+        query = 'SELECT CAR_ID FROM CAR WHERE CAR_YEAR = \'' + str(year) + '\' and  MAKE = \'' + str(make) + '\' and MODEL = \'' + str(model) + '\''
+        print(query)
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = list(sum(result, ()))
+        print(result)
+        return result[0]
 
 
     def addInvoiceToDB(self, invnum, custid, empid):
-        query = 'insert into INVOICE (INV_NUM, CUST_ID, EMP_ID) values (\'' + invnum + '\', \'' + custid + '\',\'' + empid +  '\');'
+        query = 'insert into INVOICE (INV_NUM, CUST_ID, EMP_ID) values (\'' + invnum + '\', \'' + str(custid[0]) + '\',\'' + empid +  '\');'
         print(query)
         self.cursor.execute(query)
         self.con.commit()
