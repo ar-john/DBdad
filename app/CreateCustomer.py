@@ -13,7 +13,8 @@ def CreateCustomerScreen():
         print(customerProps)
         return customerProps
 
-   
+    def back():
+        return
 
     customerIdFrame = tk.Frame(createCustomer)
     customerIdLabel = tk.Label(customerIdFrame, text="New Customer ID: ")
@@ -37,13 +38,8 @@ def CreateCustomerScreen():
     createButton = tk.Button(createCustomer, text="Back", command=back)
     createButton.pack(side=tk.RIGHT)
 
-    # def back():
-    #     adminSearch.destroy()
-    #     window = tk.Toplevel(AdminConsole.AdminCon())
-    #     window.transient(adminSearch)
-
     def on_closing():
-        sys.exit()
+            sys.exit()
 
     createCustomer.protocol("WM_DELETE_WINDOW", on_closing)
 
