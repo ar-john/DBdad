@@ -224,11 +224,13 @@ class DB:
         if adm == 1:
             a='1'
 
-        sql = 'update EMPLOYEE set admin=' + a + ' and passwd=\'' + hashed + '\' where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';'
+        sql = 'update EMPLOYEE set admin=' + a + ', passwd=\'' + hashed + '\' where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';'
         self.cursor.execute(sql)
-        result = self.cursor.fetchall()
         self.con.commit()
-        print(result)
+        # result = self.cursor.fetchall()
+        # print(result)
+        
+        
         print('user updated!')
         return
 
@@ -247,11 +249,12 @@ class DB:
 
     def updatePart(self, qty, price, partnum):
 
-        sql = 'update PART set STOCK_QTY=' + qty + ' and PRICE=' + price + ' where PART_NUM=\'' + partnum + '\';'
+        sql = 'update PART set STOCK_QTY=' + qty + ', PRICE=' + price + ' where PART_NUM=\'' + partnum + '\';'
         self.cursor.execute(sql)
-        result = self.cursor.fetchall()
         self.con.commit()
-        print(result)
+        # result = self.cursor.fetchall()
+        
+        # print(result)
         print('part updated!')
         return
 

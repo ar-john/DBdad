@@ -15,7 +15,10 @@ def UpdateExistingScreen(firstN, lastN):
         updateProps.append(lastN)
         print(updateProps)
         mydb.updateEmp(isAdmin.get(), passwordInput.get(), firstN, lastN)
-        
+    def back():
+        updateExistingEmployee.destroy()
+        window = tk.Toplevel(EmployeeSearch.searchEmp())
+        window.transient(updateEmployee)    
         
 
     passwordFrame = tk.Frame(updateExistingEmployee)
@@ -36,17 +39,14 @@ def UpdateExistingScreen(firstN, lastN):
     backButton = tk.Button(updateExistingEmployee, text="Back", command=back)
     backButton.pack(side=tk.RIGHT)
 
-    buttonFrame = tk.Frame(updateExistingEmployee)
+    # buttonFrame = tk.Frame(updateExistingEmployee)
     # createNewButton = tk.Button(createNewFrame, text="Create", command=createNew)
 
-    def back():
-        updateExistingEmployee.destroy()
-        window = tk.Toplevel(EmployeeSearch.searchEmp())
-        window.transient(updateEmployee)
+    
 
-    backButton = tk.Button(buttonFrame, text="Back", command=back)
-    backButton.pack(side = tk.RIGHT)
-    buttonFrame.pack()
+    # backButton = tk.Button(buttonFrame, text="Back", command=back)
+    # backButton.pack(side = tk.RIGHT)
+    # buttonFrame.pack()
 
 
     def on_closing():
