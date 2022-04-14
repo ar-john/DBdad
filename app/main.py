@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from tkinter import messagebox
 import connector
 # import PartFinder
 # import PartPage
@@ -37,7 +38,8 @@ def subLogin():
             
         
     else:
-        print('wrong user or pass')
+        messagebox.showerror(title='Error',message='Incorrect User/Password')
+        # print('wrong user or pass')
     # mydb.exit()
 
 #test tkinter login page
