@@ -1,12 +1,13 @@
 #!/usr/bin/python
 import connector
-import PartFinder
-import PartPage
+# import PartFinder
+# import PartPage
 import AdminConsole
-import UpdateExistingEmployee
-import AdminPartUpdate
+# import UpdateExistingEmployee
+# import AdminPartUpdate
 import tkinter as tk
 import EmployeeConsole
+import sys
 
 #creates a db object
 # mydb = connector.DB()
@@ -24,6 +25,8 @@ def subLogin():
             root.destroy()
             window = tk.Toplevel(AdminConsole.AdminCon())
             window.transient(root)
+            
+            
             
         else:
             mydb.exit()
@@ -58,6 +61,12 @@ password.place(x = 150, y = 50 , width=100)
 
 submitbtn = tk.Button(root, text='Login', bg='blue', command=subLogin)
 submitbtn.place(x=150, y=135, width=55)
+
+def on_closing():
+    sys.exit()
+
+root.protocol("WM_DELETE_WINDOW", on_closing)
+
 
 root.mainloop() #tested fine. command executes on button click
 

@@ -1,8 +1,9 @@
 #!/usr/bin/python
 import string
 import tkinter as tk
-
+import sys
 import connector
+import EmployeeAdministration
 
 # import and init so we can use the database
 
@@ -40,9 +41,6 @@ def newEmp ():
         mydb.createEmp(employeeIdInput.get(),firstNameInput.get(),lastNameInput.get(),isAdmin.get(),passwordInput.get())
         mydb.exit()
 
-
-    def back():
-        return
 
 
     employeeIdFrame = tk.Frame(createNewEmployee)
@@ -86,10 +84,27 @@ def newEmp ():
     #                                         lastNameInput.get(1.0, "end-1c"),
     #                                         passwordInput.get(1.0, "end-1c"),
     #                                         isAdmin.get()))
-    
+    def back():
+        createNewEmployee.destroy()
+        window = tk.Toplevel(EmployeeAdministration.empAdmin())
+        window.transient(createNewEmployee)
+
+    # backButton = tk.Button(buttonFrame, text="Back", command=back)
+    # backButton.pack(side = tk.RIGHT)
+    # buttonFrame.pack()
+
     createButton = tk.Button(createNewEmployee, text="Create",command=createEmployee)
     createButton.pack(side=tk.RIGHT)
     createButton = tk.Button(createNewEmployee, text="Back", command=back)
     createButton.pack(side=tk.RIGHT)
+
+    buttonFrame = tk.Frame(createNewEmployee)
+    # createNewButton = tk.Button(createNewFrame, text="Create", command=createNew)
+
+   
+    def on_closing():
+        sys.exit()
+
+    createNewEmployee.protocol("WM_DELETE_WINDOW", on_closing)
 
     createNewEmployee.mainloop()

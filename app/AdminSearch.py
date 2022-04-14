@@ -1,7 +1,9 @@
 
 import tkinter as tk
 import AdminPartUpdate
+import AdminConsole
 import connector 
+import sys
 
 def adSearch():
 
@@ -85,6 +87,19 @@ def adSearch():
     clearButton.pack(side=tk.RIGHT)
 
     buttonFrame.pack(side=tk.BOTTOM)
+
+    def back():
+        adminSearch.destroy()
+        window = tk.Toplevel(AdminConsole.AdminCon())
+        window.transient(adminSearch)
+
+    backButton = tk.Button(buttonFrame, text="Back", command=back)
+    backButton.pack(side = tk.LEFT)
+
+    def on_closing():
+        sys.exit()
+
+    adminSearch.protocol("WM_DELETE_WINDOW", on_closing)
 
     adminSearch.mainloop()
 # adSearch()

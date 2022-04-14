@@ -135,6 +135,7 @@ class DB:
         sql = ('insert into EMPLOYEE values (\'' + empId + '\', \'' + fname + '\',\'' + lname +  '\',\'' + a +  '\',\'' + self.hashpass(passw) +  '\');' ) 
         print(sql)
         self.cursor.execute(sql)
+        self.con.commit()
         print('employee entered')
         # result = self.cursor.fetchall()
 
@@ -226,8 +227,10 @@ class DB:
         sql = 'update EMPLOYEE set admin=' + a + ' and passwd=\'' + hashed + '\' where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';'
         self.cursor.execute(sql)
         result = self.cursor.fetchall()
+        self.con.commit()
         print(result)
         print('user updated!')
+        return
 
     def searchPart (self, partnum):
         sql = 'select * from PART where PART_NUM=\'' + partnum + '\';' 
@@ -247,8 +250,10 @@ class DB:
         sql = 'update PART set STOCK_QTY=' + qty + ' and PRICE=' + price + ' where PART_NUM=\'' + partnum + '\';'
         self.cursor.execute(sql)
         result = self.cursor.fetchall()
+        self.con.commit()
         print(result)
         print('part updated!')
+        return
 
     def returnPart(self, partNum):
         sql = 'select * from PART where PART_NUM=\'' + partNum + '\';' 

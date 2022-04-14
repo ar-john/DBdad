@@ -1,8 +1,13 @@
 import tkinter as tk
 
-from pkg_resources import empty_provider
+
 import CreateNewEmployee
 import EmployeeSearch
+import sys
+import AdminConsole
+# from app.AdminConsole import AdminCon
+
+
 
 def empAdmin():
 
@@ -40,4 +45,22 @@ def empAdmin():
     createNewButton.pack(side=tk.LEFT)
     createNewFrame.pack()
 
+    buttonFrame = tk.Frame(employeeAdministration)
+    # createNewButton = tk.Button(createNewFrame, text="Create", command=createNew)
+
+    def back():
+        employeeAdministration.destroy()
+        window = tk.Toplevel(AdminConsole.AdminCon())
+        window.transient(employeeAdministration)
+
+    backButton = tk.Button(buttonFrame, text="Back", command=back)
+    backButton.pack(side = tk.RIGHT)
+    buttonFrame.pack()
+
+    def on_closing():
+        sys.exit()
+
+    employeeAdministration.protocol("WM_DELETE_WINDOW", on_closing)
+
     employeeAdministration.mainloop()
+# empAdmin()
