@@ -1,6 +1,7 @@
 import tkinter as tk
 import connector
-
+import sys
+import EmployeeSearch
 
 def UpdateExistingScreen(firstN, lastN):
     updateExistingEmployee = tk.Tk()
@@ -14,11 +15,11 @@ def UpdateExistingScreen(firstN, lastN):
         updateProps.append(lastN)
         print(updateProps)
         mydb.updateEmp(isAdmin.get(), passwordInput.get(), firstN, lastN)
-        
-        
-
     def back():
-        return
+        updateExistingEmployee.destroy()
+        window = tk.Toplevel(EmployeeSearch.searchEmp())
+        window.transient(updateEmployee)    
+        
 
     passwordFrame = tk.Frame(updateExistingEmployee)
     passwordLabel = tk.Label(passwordFrame, text="Reset Employee Password: ")
@@ -37,6 +38,21 @@ def UpdateExistingScreen(firstN, lastN):
     createButton.pack(side=tk.RIGHT)
     backButton = tk.Button(updateExistingEmployee, text="Back", command=back)
     backButton.pack(side=tk.RIGHT)
+
+    # buttonFrame = tk.Frame(updateExistingEmployee)
+    # createNewButton = tk.Button(createNewFrame, text="Create", command=createNew)
+
+    
+
+    # backButton = tk.Button(buttonFrame, text="Back", command=back)
+    # backButton.pack(side = tk.RIGHT)
+    # buttonFrame.pack()
+
+
+    def on_closing():
+        sys.exit()
+
+    updateExistingEmployee.protocol("WM_DELETE_WINDOW", on_closing)
 
     updateExistingEmployee.mainloop()
 

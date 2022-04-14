@@ -1,5 +1,8 @@
 import tkinter as tk
 import connector
+import AdminSearch
+
+import sys
 
 
 def adminPart(num, category, desc, Pprice, QTY, date):
@@ -76,7 +79,9 @@ def adminPart(num, category, desc, Pprice, QTY, date):
         return partUpdate
 
     def back():
-        return None
+        adminUpdatePage.destroy()
+        window = tk.Toplevel(AdminSearch.adSearch())
+        window.transient(adminUpdatePage)
 
     buttonFrame = tk.Frame(adminUpdatePage)
 
@@ -90,6 +95,15 @@ def adminPart(num, category, desc, Pprice, QTY, date):
 
     getPart()
 
+    
+
+    # backButton = tk.Button(buttonFrame, text="Back", command=back)
+    # backButton.pack(side = tk.LEFT)
+
+    def on_closing():
+        sys.exit()
+
+    adminUpdatePage.protocol("WM_DELETE_WINDOW", on_closing)
 
     adminUpdatePage.mainloop()
 

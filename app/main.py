@@ -1,13 +1,15 @@
 #!/usr/bin/python
-import sys
+from tkinter import messagebox
+
 import connector
-import PartFinder
-import PartPage
+# import PartFinder
+# import PartPage
 import AdminConsole
-import UpdateExistingEmployee
-import AdminPartUpdate
+# import UpdateExistingEmployee
+# import AdminPartUpdate
 import tkinter as tk
 import EmployeeConsole
+import sys
 
 #creates a db object
 # mydb = connector.DB()
@@ -26,6 +28,8 @@ def subLogin():
             window = tk.Toplevel(AdminConsole.AdminCon())
             window.transient(root)
             
+            
+            
         else:
             mydb.exit()
             root.destroy()
@@ -35,7 +39,8 @@ def subLogin():
             
         
     else:
-        print('wrong user or pass')
+        messagebox.showerror(title='Error',message='Incorrect User/Password')
+        # print('wrong user or pass')
     # mydb.exit()
 
 #test tkinter login page
@@ -64,6 +69,7 @@ def on_closing():
     sys.exit()
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
+
 root.mainloop() #tested fine. command executes on button click
 
 

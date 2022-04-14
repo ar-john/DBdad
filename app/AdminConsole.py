@@ -3,20 +3,26 @@ import tkinter as tk
 import AdminPartUpdate
 import EmployeeAdministration
 import AdminSearch
+import sys
 
-def updateEmployee():
-    #launch employee update screen
-    
-    return
+
+
 
 
 def AdminCon():
+
+    
 
     def updateEmployee():
         #launch employee update screen
         adminConsole.destroy()
         window = tk.Toplevel(EmployeeAdministration.empAdmin())
         window.transient(window)
+        
+        
+        
+        
+
 
     #method to take us to the Adminpartupdate page
     def updatePart():
@@ -24,6 +30,11 @@ def AdminCon():
         adminConsole.destroy()
         window = tk.Toplevel(AdminSearch.adSearch())
         window.transient(window)
+        
+
+        
+
+    
 
     adminConsole = tk.Tk()
     adminConsole.title("Admin Console")
@@ -44,4 +55,14 @@ def AdminCon():
     updatePartButton.pack(side=tk.LEFT)
     updatePartFrame.pack()
 
+    
+
+    def on_closing():
+        sys.exit()
+
+    adminConsole.protocol("WM_DELETE_WINDOW", on_closing)
+
     adminConsole.mainloop()
+
+    # return adminConsole
+# AdminCon()

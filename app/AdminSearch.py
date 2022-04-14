@@ -1,7 +1,9 @@
 
 import tkinter as tk
 import AdminPartUpdate
+import AdminConsole
 import connector 
+import sys
 
 def adSearch():
 
@@ -18,35 +20,35 @@ def adSearch():
 
     partNumSearch.pack()
 
-    chooseLabel = tk.Label(adminSearch, text="---or choose at least 1---")
-    chooseLabel.pack()
+    # chooseLabel = tk.Label(adminSearch, text="---or choose at least 1---")
+    # chooseLabel.pack()
 
-    categories = ["Engine", "Lights", "Brakes", "Transmissions", "Windshield Wipers"]
-    descriptions=["Brake Pads", "Headlights", "Brake Lights", "Coilovers"]
+    # categories = ["Engine", "Lights", "Brakes", "Transmissions", "Windshield Wipers"]
+    # descriptions=["Brake Pads", "Headlights", "Brake Lights", "Coilovers"]
 
-    selectCategory = tk.Frame(adminSearch)
-    selectCategoryLabel = tk.Label(selectCategory, text="Select Category: ")
-    selectCategoryLabel.pack(side=tk.LEFT)
+    # selectCategory = tk.Frame(adminSearch)
+    # selectCategoryLabel = tk.Label(selectCategory, text="Select Category: ")
+    # selectCategoryLabel.pack(side=tk.LEFT)
 
-    category = tk.StringVar(selectCategory)
-    category.set(None)
+    # category = tk.StringVar(selectCategory)
+    # category.set(None)
 
-    categoryMenu = tk.OptionMenu(selectCategory, category, *categories)
-    categoryMenu.pack(side=tk.LEFT)
+    # categoryMenu = tk.OptionMenu(selectCategory, category, *categories)
+    # categoryMenu.pack(side=tk.LEFT)
 
-    selectCategory.pack()
+    # selectCategory.pack()
 
-    selectDescription = tk.Frame(adminSearch)
-    selectDescriptionLabel = tk.Label(selectDescription, text="Select Description: ")
-    selectDescriptionLabel.pack(side=tk.LEFT)
+    # selectDescription = tk.Frame(adminSearch)
+    # selectDescriptionLabel = tk.Label(selectDescription, text="Select Description: ")
+    # selectDescriptionLabel.pack(side=tk.LEFT)
 
-    description = tk.StringVar(selectDescription)
-    description.set(None)
+    # description = tk.StringVar(selectDescription)
+    # description.set(None)
 
-    descriptionMenu = tk.OptionMenu(selectDescription, description, *descriptions)
-    descriptionMenu.pack(side=tk.LEFT)
+    # descriptionMenu = tk.OptionMenu(selectDescription, description, *descriptions)
+    # descriptionMenu.pack(side=tk.LEFT)
 
-    selectDescription.pack()
+    # selectDescription.pack()
 
 
     def getProps():
@@ -73,8 +75,9 @@ def adSearch():
 
 
     def clearProps():
-        category.set(None)
-        description.set(None)
+        partNumInput.delete(0, 'end')
+        # category.set(None)
+        # description.set(None)
 
     buttonFrame = tk.Frame(adminSearch)
 
@@ -85,6 +88,19 @@ def adSearch():
     clearButton.pack(side=tk.RIGHT)
 
     buttonFrame.pack(side=tk.BOTTOM)
+
+    def back():
+        adminSearch.destroy()
+        window = tk.Toplevel(AdminConsole.AdminCon())
+        window.transient(adminSearch)
+
+    backButton = tk.Button(buttonFrame, text="Back", command=back)
+    backButton.pack(side = tk.LEFT)
+
+    def on_closing():
+        sys.exit()
+
+    adminSearch.protocol("WM_DELETE_WINDOW", on_closing)
 
     adminSearch.mainloop()
 # adSearch()

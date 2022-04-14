@@ -1,7 +1,8 @@
 import tkinter as tk
 import connector
 import UpdateExistingEmployee
-
+import sys
+import EmployeeAdministration
 
 def searchEmp():
     
@@ -25,8 +26,7 @@ def searchEmp():
         else:
             print('Incorrect input')
 
-    def back():
-        return
+
 
     firstNameFrame = tk.Frame(searchEmployee)
     firstNameLabel = tk.Label(firstNameFrame, text="Employee First Name: ")
@@ -44,10 +44,26 @@ def searchEmp():
 
     searchButton = tk.Button(searchEmployee, text="Update", command=search)
     searchButton.pack(side=tk.RIGHT)
-    searchButton = tk.Button(searchEmployee, text="Back", command=back)
-    searchButton.pack(side=tk.RIGHT)
+    # searchButton = tk.Button(searchEmployee, text="Back", command=back)
+    # searchButton.pack(side=tk.RIGHT)
 
-    
+    buttonFrame = tk.Frame(searchEmployee)
+    # createNewButton = tk.Button(createNewFrame, text="Create", command=createNew)
+
+    def back():
+        searchEmployee.destroy()
+        window = tk.Toplevel(EmployeeAdministration.empAdmin())
+        window.transient(searchEmployee)
+
+    backButton = tk.Button(buttonFrame, text="Back", command=back)
+    backButton.pack(side = tk.RIGHT)
+    buttonFrame.pack()
+
+
+    def on_closing():
+        sys.exit()
+
+    searchEmployee.protocol("WM_DELETE_WINDOW", on_closing)  
 
     searchEmployee.mainloop()
 

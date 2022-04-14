@@ -1,8 +1,10 @@
 import tkinter as tk
+
 from venv import create
 from connector import DB
 import sys
 import EmployeeConsole
+
 
 def CreateCustomerScreen():
     createCustomer = tk.Tk()

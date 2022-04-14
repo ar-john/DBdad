@@ -168,6 +168,7 @@ class DB:
         sql = ('insert into EMPLOYEE values (\'' + empId + '\', \'' + fname + '\',\'' + lname +  '\',\'' + a +  '\',\'' + self.hashpass(passw) +  '\');' ) 
         print(sql)
         self.cursor.execute(sql)
+        self.con.commit()
         print('employee entered')
         # result = self.cursor.fetchall()
 
@@ -281,11 +282,15 @@ class DB:
         if adm == 1:
             a='1'
 
-        sql = 'update EMPLOYEE set admin=' + a + ' and passwd=\'' + hashed + '\' where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';'
+        sql = 'update EMPLOYEE set admin=' + a + ', passwd=\'' + hashed + '\' where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';'
         self.cursor.execute(sql)
-        result = self.cursor.fetchall()
-        print(result)
+        self.con.commit()
+        # result = self.cursor.fetchall()
+        # print(result)
+        
+        
         print('user updated!')
+        return
 
     def searchPart (self, partnum):
         sql = 'select * from PART where PART_NUM=\'' + partnum + '\';' 
@@ -302,11 +307,14 @@ class DB:
 
     def updatePart(self, qty, price, partnum):
 
-        sql = 'update PART set STOCK_QTY=' + qty + ' and PRICE=' + price + ' where PART_NUM=\'' + partnum + '\';'
+        sql = 'update PART set STOCK_QTY=' + qty + ', PRICE=' + price + ' where PART_NUM=\'' + partnum + '\';'
         self.cursor.execute(sql)
-        result = self.cursor.fetchall()
-        print(result)
+        self.con.commit()
+        # result = self.cursor.fetchall()
+        
+        # print(result)
         print('part updated!')
+        return
 
     def returnPart(self, partNum):
         sql = 'select * from PART where PART_NUM=\'' + partNum + '\';' 
