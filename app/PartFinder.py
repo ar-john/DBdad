@@ -1,10 +1,11 @@
 #!/usr/bin/python
+import sys
 import tkinter as tk
 from connector import DB
 import PartPage
 import EmployeeConsole
 
-def partWin(invoiceNumber = None):
+def partWin(invoiceNumber = None, carid = None):
     #creates a db object
     db = DB()
     #create part finder window
@@ -42,21 +43,23 @@ def partWin(invoiceNumber = None):
 
     def modelCallback(*args):
         selectCategory = tk.Frame(partFinder)
-        selectCategoryLabel = tk.Label(selectCategory, text="Select Category (optional): ")
+        selectCategoryLabel = tk.Label(selectCategory, text="Select Category: ")
         selectCategoryLabel.pack(side=tk.LEFT)
         category.set(None)
         category.trace("w", categoryCallBack)
-        categories = db.getPartCategories()
+        compatibility = (db.getCompatibility(year.get(), make.get(), model.get())[0])
+        categories = db.getPartCategories(compatibility)
         categoryMenu = tk.OptionMenu(selectCategory, category, *categories)
         categoryMenu.pack(side=tk.LEFT)
         selectCategory.pack()
 
     def categoryCallBack(*args):
         selectDescription = tk.Frame(partFinder)
-        selectDescriptionLabel = tk.Label(selectDescription, text="Select Description (optional): ")
+        selectDescriptionLabel = tk.Label(selectDescription, text="Select Description: ")
         selectDescriptionLabel.pack(side=tk.LEFT)
         description.set(None)
-        descriptions = db.getPartDescriptions(category.get())
+        compatibility = (db.getCompatibility(year.get(), make.get(), model.get())[0])
+        descriptions = db.getPartDescriptions(category.get(), compatibility)
         descriptionMenu = tk.OptionMenu(selectDescription, description, *descriptions)
         descriptionMenu.pack(side=tk.LEFT)
         selectDescription.pack()
@@ -76,6 +79,12 @@ def partWin(invoiceNumber = None):
 
     selectYear.pack()
 
+    if carid:
+        car = db.getCar(carid)
+        year.set(car[1])
+        make.set(car[2])
+        model.set(car[3])
+
     def getProps():
         props = []
         props.append(year.get())
@@ -93,7 +102,7 @@ def partWin(invoiceNumber = None):
 
     def back():
         partFinder.destroy()
-        window = tk.Toplevel(EmployeeConsole.EConsole.empConsole())
+        window = tk.Toplevel(EmployeeConsole.EConsole())
         window.transient(partFinder)
 
     buttonGroup = tk.Frame(partFinder)
@@ -105,6 +114,11 @@ def partWin(invoiceNumber = None):
     clearButton.pack(side=tk.RIGHT)
 
     buttonGroup.pack(side=tk.BOTTOM)
+
+    def on_closing():
+        sys.exit()
+
+    partFinder.protocol("WM_DELETE_WINDOW", on_closing)
 
     partFinder.mainloop()
 

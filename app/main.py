@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from tkinter import messagebox
+
 import connector
 # import PartFinder
 # import PartPage
@@ -32,8 +33,8 @@ def subLogin():
         else:
             mydb.exit()
             root.destroy()
-            console = EmployeeConsole.EConsole()
-            window = tk.Toplevel(console.empConsole())
+            #console = EmployeeConsole.EConsole()
+            window = tk.Toplevel(EmployeeConsole.EConsole())
             window.transient(root)
             
         
@@ -68,7 +69,6 @@ def on_closing():
     sys.exit()
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
-
 
 root.mainloop() #tested fine. command executes on button click
 
