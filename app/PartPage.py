@@ -14,7 +14,9 @@ def partpageGui(partnum, invoiceNumber = None):
 
     partProps = db.getPart(partnum)
 
+
     partPicture = Image.open("img/" + str(partProps[1])+'.jpg')
+
     partPicture = partPicture.resize((100, 100))
     partPicture = ImageTk.PhotoImage(partPicture)
     pictureLabel = tk.Label(partPage, image=partPicture)
@@ -62,4 +64,3 @@ def partpageGui(partnum, invoiceNumber = None):
 
     partPage.mainloop()
 
-#partpageGui('00001')

@@ -6,7 +6,9 @@ import InvoiceGenerator
 from connector import DB
 
 class EConsole:
+
     employeeConsole = None
+
     invoiceNumber = ""
     db = DB()
     def __init__(self):
@@ -93,3 +95,4 @@ class EConsole:
         self.employeeConsole.destroy()
         top = tk.Toplevel(PartFinder.partWin(self.invoiceNumber, car))
         top.transient(self.employeeConsole)
+

@@ -22,6 +22,12 @@ class DB:
             user="root",
             password="root"
             )
+
+        # self.con = mysql.connector.connect(
+        #     host="35.239.196.216",
+        #     user="root",
+        #     password="dad"
+        #     )
         print(self.con)
         print("connection successful!")
 
@@ -251,9 +257,64 @@ class DB:
 
         return hashed
 
-    
+    def searchEmpDB(self, fname, lname):
+        sql = 'select * from EMPLOYEE where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';' 
+        self.cursor.execute(sql)
 
+        # print(self.cursor.fetchall())
+        # result = self.cursor.fetchall()
+        # return result
+        result = self.cursor.fetchall()
+        if result == 'NULL':
+            return False
+        else:
+            return True
+        
+        # sanitizedResult = list(sum(result, ()))
+        # print(sanitizedResult)
+        # return sanitizedResult
 
+    def updateEmp(self, adm, passw, fname, lname):
+        hashed = self.hashpass(passw)
+
+        a = '0'
+        if adm == 1:
+            a='1'
+
+        sql = 'update EMPLOYEE set admin=' + a + ' and passwd=\'' + hashed + '\' where firstname=\'' + fname + '\' and lastname=\'' + lname + '\';'
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        print(result)
+        print('user updated!')
+
+    def searchPart (self, partnum):
+        sql = 'select * from PART where PART_NUM=\'' + partnum + '\';' 
+        self.cursor.execute(sql)
+
+        # print(self.cursor.fetchall())
+        # result = self.cursor.fetchall()
+        # return result
+        result = self.cursor.fetchall()
+        if result == 'NULL':
+            return False
+        else:
+            return True
+
+    def updatePart(self, qty, price, partnum):
+
+        sql = 'update PART set STOCK_QTY=' + qty + ' and PRICE=' + price + ' where PART_NUM=\'' + partnum + '\';'
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        print(result)
+        print('part updated!')
+
+    def returnPart(self, partNum):
+        sql = 'select * from PART where PART_NUM=\'' + partNum + '\';' 
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        sanitizedResult = list(sum(result, ()))
+        print(sanitizedResult)
+        return sanitizedResult
 
     def exit(self):
         self.cursor.close()
