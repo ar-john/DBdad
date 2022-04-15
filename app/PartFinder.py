@@ -85,16 +85,26 @@ def partWin(invoiceNumber = None, carid = None):
         make.set(car[2])
         model.set(car[3])
 
+    # def getProps():
+    #     props = []
+    #     props.append(year.get())
+    #     props.append(make.get())
+    #     props.append(model.get())
+    #     props.append(category.get())
+    #     props.append(description.get())
+    #     part = db.searchPart(props)
+    #     partFinder.destroy()
+    #     window = tk.Toplevel(PartPage.partpageGui(part, invoiceNumber))
+    #     window.transient(partFinder)
     def getProps():
         props = []
         props.append(year.get())
         props.append(make.get())
         props.append(model.get())
-        if category.get():
-            props.append(category.get())
-        if description.get():
-            props.append(description.get())
+        props.append(category.get())
+        props.append(description.get())
         parts = db.searchPart(props)
+        print(parts)
         for part in parts:
             partFinder.destroy()
             window = tk.Toplevel(PartPage.partpageGui(part, invoiceNumber))

@@ -63,7 +63,7 @@ def adSearch():
         #     props.append(description.get())
         # print(props)
         # AdminPartUpdate.adminPart(partNumInput.get())
-        if mydb.searchPart(partNumInput.get()) == True:
+        if mydb.searchPartYYY(partNumInput.get()) == True:
             for x in mydb.returnPart(partNumInput.get()):
                 result.append(x)
             window = tk.Toplevel(AdminPartUpdate.adminPart(partNumInput.get(), category=result[1], desc=result[2], Pprice=result[3], QTY=result[4], date=result[5]))

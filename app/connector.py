@@ -227,6 +227,7 @@ class DB:
     def getCompatibility(self, year = None, make = None, model = None):
         query = 'SELECT COMP_ID FROM CAR WHERE CAR_YEAR = \'' + str(year) + '\' and  MAKE = \'' + make + '\' and MODEL = \'' + model + '\''
         self.cursor.execute(query)
+        print(query)
         result = self.cursor.fetchall()
         result = list(sum(result, ()))
         print(result)
@@ -292,8 +293,8 @@ class DB:
         print('user updated!')
         return
 
-    def searchPart (self, partnum):
-        sql = 'select * from PART where PART_NUM=\'' + partnum + '\';' 
+    def searchPartYYY (self, partnum):
+        sql = 'select * from PART where PART_NUM=\'' + str(partnum[0]) + '\';' 
         self.cursor.execute(sql)
 
         # print(self.cursor.fetchall())
