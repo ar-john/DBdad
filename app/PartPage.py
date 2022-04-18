@@ -50,8 +50,9 @@ def partpageGui(partnum, invoiceNumber = None):
 
     buttonFrame = tk.Frame(partPage)
 
-    cartButton = tk.Button(buttonFrame, text="Add To Invoice " + invoiceNumber, command=lambda: addToInvoice(partProps[0], 1))
-    cartButton.pack(side=tk.LEFT)
+    if invoiceNumber:
+        cartButton = tk.Button(buttonFrame, text="Add To Invoice " + invoiceNumber, command=lambda: addToInvoice(partProps[0], 1))
+        cartButton.pack(side=tk.LEFT)
 
     backButton = tk.Button(buttonFrame, text="Back", command=back)
     backButton.pack(side = tk.LEFT)
