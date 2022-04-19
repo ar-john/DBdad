@@ -1,0 +1,10 @@
+scripts/add_car_comp_column.sql
+scripts/dd_cars.sql
+scripts/add_parts.sql
+scripts/create_and_insert_customers.sql
+scripts/create_car.sql
+scripts/create_compatible.sql
+scripts/create_employee.sql
+scripts/create_part.sql
+scripts/dbdadinitscript.sql
+scripts/update_car_comp.sql
