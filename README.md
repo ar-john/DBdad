@@ -11,10 +11,11 @@ To Run DBdad
     3) Run included dbdadinitscript.sql
 
 2) Downloads 
-    1)Run following commands in powershell or terminal
+    1) Run following commands in powershell or terminal
 -     pip install mysql-connector-python
 -     pip install pillow
 -     pip install reportlab
     2)Download github code
     3)Import code into vscode (or similar IDE)
     4)open and run 'main.py'
+
