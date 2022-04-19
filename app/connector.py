@@ -135,6 +135,10 @@ class DB:
         print(query)
         self.cursor.execute(query)
         self.con.commit()
+        stockQuery = 'update part set stock_qty = stock_qty - ' + str(qty) + ' where PART_NUM = ' + str(partnum)
+        print(stockQuery)
+        self.cursor.execute(stockQuery)
+        self.con.commit()
         return
 
     def getCustomers(self):
