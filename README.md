@@ -12,7 +12,7 @@ To install DBdad
                 
                 -password=root
                 
-         -Run included dbdadinitscript.sql
+         -Run included dbdadinitscript.sql, add_car_comp_column.sqp, add_cars.sql, and add_parts.sql
          
          
 2) Downloads
