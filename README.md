@@ -8,7 +8,7 @@ To Run DBdad
 -           user=root
 -           password=root
 
-Run included scrips
+    3) Run included dbdadinitscript.sql
 
 2) Downloads 
     1)Run following commands in powershell or terminal
