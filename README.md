@@ -1,7 +1,7 @@
 # DBdad
 
 To Run DBdad
-1) Set up database
+Set up database
 
     1) Install MySQL Workbench
     2) Create a local instance with the following credentials
@@ -10,7 +10,7 @@ To Run DBdad
 
     3) Run included dbdadinitscript.sql
 
-2) Downloads 
+ Downloads 
     1) Run following commands in powershell or terminal
         1)pip install mysql-connector-python
         2)pip install pillow
